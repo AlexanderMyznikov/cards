@@ -7,4 +7,5 @@ import models.Model;
  */
 public interface OnFragmentChanged {
     void setAnswer(boolean isAnswered, Model answeredModel);
+
 }

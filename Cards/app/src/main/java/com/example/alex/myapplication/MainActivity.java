@@ -1,5 +1,7 @@
 package com.example.alex.myapplication;
 
+import android.database.DataSetObserver;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +10,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import adapters.CustomPageAdapter;
 import fragments.OnFragmentChanged;
 import models.CheckBoxModel;
 import models.Model;
@@ -20,7 +23,8 @@ public class MainActivity extends ActionBarActivity implements OnFragmentChanged
 
     private List<Model> cardsModels;
     public Model currentCardModel;
-    private int currentCardPosition;
+    private CustomPageAdapter cardsAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,14 @@ public class MainActivity extends ActionBarActivity implements OnFragmentChanged
     }
 
     private void setAdapter() {
-        
+        ViewPager pager = (ViewPager)findViewById(R.id.vp_pager);
+
+        cardsAdapter = new CustomPageAdapter(getSupportFragmentManager());
+        cardsAdapter.setCardsModels(cardsModels);
+
+
+
+        pager.setAdapter(cardsAdapter);
     }
 
 
@@ -59,35 +70,15 @@ public class MainActivity extends ActionBarActivity implements OnFragmentChanged
 
     @Override
     public void setAnswer(boolean isAnswered, Model answeredModel) {
+
+
         if(isAnswered){
             removeQuestionSendResult(answeredModel);
-        }else {
-            nextQuestion(answeredModel);
         }
     }
+
 
     private void removeQuestionSendResult(Model answeredModel) {
-        currentCardPosition = cardsModels.indexOf(answeredModel);
-        cardsModels.remove(answeredModel);
-
-        if(currentCardPosition > cardsModels.size()|| currentCardPosition == -1){
-            currentCardPosition = 0;
-        }
-        currentCardModel = cardsModels.get(currentCardPosition);
-    }
-
-    private void nextQuestion(Model answeredModel){
-        currentCardPosition = cardsModels.indexOf(answeredModel);
-        if(currentCardPosition > cardsModels.size()){
-            currentCardPosition = 0;
-        }else {
-            currentCardPosition++;
-        }
-
-        currentCardModel = cardsModels.get(currentCardPosition);
-    }
-
-    private void changeFragment(){
 
     }
 
