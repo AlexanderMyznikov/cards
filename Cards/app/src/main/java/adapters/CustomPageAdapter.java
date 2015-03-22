@@ -9,6 +9,10 @@ import java.util.List;
 
 import constants.Constants;
 import fragments.BaseFragment;
+import fragments.CardFragmentWithCheckboxes;
+import fragments.CardFragmentWithEditText;
+import fragments.CardFragmentWithMultipleButtons;
+import fragments.CardFragmentWithUploadPhoto;
 import models.CheckBoxModel;
 import models.Model;
 import models.MultyButtonsModel;
@@ -40,16 +44,16 @@ public class CustomPageAdapter extends FragmentPagerAdapter {
 
 
         if(CheckBoxModel.class.isInstance(currentCard)) {
-            fragment = new CheckBoxFragment();
+            fragment = new CardFragmentWithCheckboxes();
 
         }else if(MultyButtonsModel.class.isInstance(currentCard)) {
-            fragment = new MultyButtonsFragment();
+            fragment = new CardFragmentWithMultipleButtons();
 
         }else if(SinlgeTextModel.class.isInstance(currentCard)){
-            fragment = new SinlgeTextFragment();
+            fragment = new CardFragmentWithEditText();
 
         }else if(UploadPhotoModel.class.isInstance(currentCard)){
-            fragment = new UploadPhotoFragment();
+            fragment = new CardFragmentWithUploadPhoto();
         }
         fragment.setArguments(bundle);
 

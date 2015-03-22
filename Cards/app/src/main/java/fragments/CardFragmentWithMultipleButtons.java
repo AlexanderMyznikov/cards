@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.alex.myapplication.MainActivity;
 import com.example.alex.myapplication.R;
 
+import models.MultyButtonsModel;
 import models.SinlgeTextModel;
 
 /**
@@ -48,8 +49,8 @@ public class CardFragmentWithMultipleButtons extends BaseFragment implements Vie
             tvSubmit.setOnClickListener(this);
         }
         private void setQuestion(){
-            SinlgeTextModel model  =  (SinlgeTextModel)getModel();
-            tvQuestion.setText(model.question);
+//            MultyButtonsModel model  =  (MultyButtonsModel)getModel();
+//            tvQuestion.setText(model.getQuestion());
         }
         private void sendQuestion(){
 
