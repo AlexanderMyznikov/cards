@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
+import constants.Constants;
 import fragments.BaseFragment;
 import models.CheckBoxModel;
 import models.Model;
@@ -35,13 +36,11 @@ public class CustomPageAdapter extends FragmentPagerAdapter {
         Model currentCard = cardsModels.get(position);
 
         bundle.clear();
-        bundle.putInt("position", position);
+        bundle.putInt(Constants.MODEL_POSITION_KEY, position);
 
 
         if(CheckBoxModel.class.isInstance(currentCard)) {
             fragment = new CheckBoxFragment();
-            fragment.setArguments();
-
 
         }else if(MultyButtonsModel.class.isInstance(currentCard)) {
             fragment = new MultyButtonsFragment();
@@ -52,7 +51,7 @@ public class CustomPageAdapter extends FragmentPagerAdapter {
         }else if(UploadPhotoModel.class.isInstance(currentCard)){
             fragment = new UploadPhotoFragment();
         }
-
+        fragment.setArguments(bundle);
 
         //We will create fragments here
 
