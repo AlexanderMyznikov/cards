@@ -36,14 +36,14 @@
             android:text="fefefkelkeeljflskjflksjflkkjflskjfskjffkslejflejflejffjlskfjls"
             android:layout_margin="10dp"/>
 
-        <ImageView
+        <EditText
 
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/tv_question"
-            android:id="@+id/iv_image"
+            android:id="@+id/et_Answer"
             android:src="@mipmap/no_photo"
-            android:background="@drawable/background_image_bakcground"
+
             android:padding="10dp"
             android:layout_centerHorizontal="true"
             />
