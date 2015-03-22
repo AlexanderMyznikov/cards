@@ -9,7 +9,7 @@ import models.Model;
 /**
  * Created by Admin on 22.03.2015.
  */
-<<<<<<< HEAD
+
 public class BaseFragment extends Fragment{
     private Model cardModel;
     public void getModel(){
@@ -23,10 +23,4 @@ public class BaseFragment extends Fragment{
     public void setAnswer(){
         ((OnFragmentChanged)getActivity()).setAnswer(true, cardModel);
     }
-=======
-public abstract class BaseFragment extends Fragment{
-
-    //private getQuestions()
-
->>>>>>> origin/master
 }
