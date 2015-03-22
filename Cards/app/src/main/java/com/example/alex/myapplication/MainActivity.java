@@ -5,8 +5,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
 
-public class MainActivity extends ActionBarActivity {
+import fragments.OnFragmentChanged;
+import models.Model;
+
+
+public class MainActivity extends ActionBarActivity implements OnFragmentChanged {
+
+    private List<Model> cardsModels;
+    public Model currentCardModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +43,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setAnswer(boolean isAnswered, Model answeredModel) {
+
     }
 }
