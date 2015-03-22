@@ -1,29 +1,33 @@
 package fragments;
 
 import android.app.Fragment;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.alex.myapplication.MainActivity;
 
-import org.w3c.dom.Text;
+import android.support.v4.app.Fragment;
 
+import com.example.alex.myapplication.MainActivity;
+
+import constants.Constants;
 import models.Model;
 
 /**
  * Created by Admin on 22.03.2015.
  */
 
-public class BaseFragment extends Fragment{
-    private Model cardModel;
-    protected View mRootView;
+public class BaseFragment extends Fragment {
+    protected Model cardModel;
+
 
 
 
     protected MainActivity mActivity;
 
     public Model getModel(){
-       return cardModel = ((MainActivity) getActivity()).currentCardModel;
+        int pos = getArguments().getInt(Constants.MODEL_POSITION_KEY);
+        cardModel = ((MainActivity)getActivity()).getCardsModels().get(pos);
+        return cardModel;
     }
 
     public void cancel(){
