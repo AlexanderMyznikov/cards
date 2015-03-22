@@ -20,13 +20,13 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_margin="10dp"/>
-         <ImageView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:id="@+id/iv_star"
-             android:src="@android:drawable/star_big_on"
-             android:layout_margin="10dp"
-             />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_star"
+            android:src="@android:drawable/star_big_on"
+            android:layout_margin="10dp"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,21 +36,18 @@
             android:text="fefefkelkeeljflskjflksjflkkjflskjfskjffkslejflejflejffjlskfjls"
             android:layout_margin="10dp"/>
 
-        <ImageView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/ll_checkbox_container">
 
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_below="@id/tv_question"
-            android:id="@+id/iv_image"
-            android:src="@mipmap/no_photo"
-            android:background="@drawable/background_image_bakcground"
-            android:padding="10dp"
-            android:layout_centerHorizontal="true"
-            />
+
+                </LinearLayout>
 
 
 
-        </RelativeLayout>
+    </RelativeLayout>
 
 
 
@@ -62,11 +59,12 @@
         android:gravity="center"
         >
         <TextView
+            android:id="@+id/tv_submit"
             style="@style/AppTheme.Button"
             android:text="Laheta"
             />
 
-        </LinearLayout>
+    </LinearLayout>
 
 
 
