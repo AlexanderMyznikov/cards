@@ -3,15 +3,12 @@ package fragments;
 
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.alex.myapplication.MainActivity;
 
 
-
-import com.example.alex.myapplication.MainActivity;
-
-import constants.Constants;
 import models.Model;
 
 /**
@@ -19,24 +16,38 @@ import models.Model;
  */
 
 public class BaseFragment extends Fragment {
-    protected Model cardModel;
+    protected Model mCardModel;
     protected View mRootView;
+    protected TextView tvQuestion;
+    protected ImageView ivStar;
+    protected TextView tvPoints;
 
 
 
     protected MainActivity mActivity;
 
-    public Model getModel(){
-        int pos = getArguments().getInt(Constants.MODEL_POSITION_KEY);
-        cardModel = ((MainActivity)getActivity()).getCardsModels().get(pos);
-        return cardModel;
+
+
+
+
+
+    protected void setData(Model _model){
+        tvQuestion.setText(_model.getText());
+
+        if(_model.isFavourite()){
+            ivStar.setVisibility(View.VISIBLE);
+        }else {
+            ivStar.setVisibility(View.GONE);
+        }
+        tvPoints.setText("+" + _model.getPoints());
     }
 
+
     public void cancel(){
-        ((OnFragmentChanged)getActivity()).setAnswer(false, cardModel);
+        ((OnFragmentChanged)getActivity()).setAnswer(false, mCardModel);
     }
 
     public void setAnswer(){
-        ((OnFragmentChanged)getActivity()).setAnswer(true, cardModel);
+        ((OnFragmentChanged)getActivity()).setAnswer(true,mCardModel);
     }
 }

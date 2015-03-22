@@ -43,9 +43,11 @@
             android:layout_below="@id/tv_question"
             android:id="@+id/et_Answer"
             android:src="@mipmap/no_photo"
-
+            android:background="@drawable/background_edittext"
             android:padding="10dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             />
 
 
@@ -61,10 +63,7 @@
         android:background="#ff2fc9b0"
         android:gravity="center"
         >
-        <TextView
-            style="@style/AppTheme.Button"
-            android:text="Laheta"
-            />
+        <include layout="@layout/answer_button"/>
 
     </LinearLayout>
 

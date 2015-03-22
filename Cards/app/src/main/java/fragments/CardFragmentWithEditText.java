@@ -7,11 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.alex.myapplication.MainActivity;
 import com.example.alex.myapplication.R;
 
+import constants.Constants;
+import models.CheckBoxModel;
 import models.SinlgeTextModel;
 
 /**
@@ -20,7 +23,7 @@ import models.SinlgeTextModel;
 public class CardFragmentWithEditText extends BaseFragment implements View.OnClickListener {
 
 
-    private TextView tvQuestion;
+
     private EditText etAnswer;
     private TextView tvSubmit;
 
@@ -42,16 +45,20 @@ public class CardFragmentWithEditText extends BaseFragment implements View.OnCli
         return mRootView;
     }
     private void findViews(){
+        tvQuestion = (TextView)mRootView.findViewById(R.id.tv_question);
         etAnswer = (EditText)mRootView.findViewById(R.id.et_Answer);
         tvSubmit = (TextView)mRootView.findViewById(R.id.tv_submit);
-        tvQuestion = (TextView)mRootView.findViewById(R.id.tv_question);
+        tvPoints = (TextView)mRootView.findViewById(R.id.tv_points);
+        ivStar = (ImageView)mRootView.findViewById(R.id.iv_star);
     }
     private void setListeners(){
         tvSubmit.setOnClickListener(this);
     }
     private void setQuestion(){
-        SinlgeTextModel model  =  (SinlgeTextModel)getModel();
-        tvQuestion.setText(model.question);
+        SinlgeTextModel model  =   getArguments().getParcelable(Constants.MODEL_QUESTION_KEY);
+        mCardModel = model;
+        setData(model);
+
     }
     private void sendQuestion(){
 

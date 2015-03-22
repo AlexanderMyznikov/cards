@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.alex.myapplication.MainActivity;
 import com.example.alex.myapplication.R;
 
+import constants.Constants;
 import models.SinlgeTextModel;
 import models.UploadPhotoModel;
 
@@ -21,8 +22,10 @@ import models.UploadPhotoModel;
  */
 public class CardFragmentWithUploadPhoto extends BaseFragment implements View.OnClickListener{
 
-    private TextView tvQuestion;
-   private ImageView ivPhoto;
+
+   private ImageView ivPhoto1;
+   private ImageView ivPhoto2;
+   private ImageView ivPhoto3;
     private TextView tvSubmit;
 
 
@@ -44,22 +47,34 @@ public class CardFragmentWithUploadPhoto extends BaseFragment implements View.On
         return mRootView;
     }
     private void findViews(){
-        ivPhoto = (ImageView)mRootView.findViewById(R.id.iv_image);
-        tvSubmit = (TextView)mRootView.findViewById(R.id.tv_submit);
+        ivPhoto1 = (ImageView)mRootView.findViewById(R.id.iv_image1);
+        ivPhoto2 = (ImageView)mRootView.findViewById(R.id.iv_image2);
+        ivPhoto3 = (ImageView)mRootView.findViewById(R.id.iv_image3);
         tvQuestion = (TextView)mRootView.findViewById(R.id.tv_question);
+        tvSubmit = (TextView) mRootView.findViewById(R.id.tv_submit);
+        tvPoints = (TextView)mRootView.findViewById(R.id.tv_points);
+        ivStar = (ImageView)mRootView.findViewById(R.id.iv_star);
     }
     private void setListeners(){
         tvSubmit.setOnClickListener(this);
     }
     private void setQuestion(){
-        UploadPhotoModel model  =  (UploadPhotoModel)getModel();
+        UploadPhotoModel model  =  getArguments().getParcelable(Constants.MODEL_QUESTION_KEY);
+        mCardModel= model;
+        setData(model);
 
     }
     private void sendQuestion(){
 
     }
 
-    private void uploadImage(){
+    private void uploadImage1(){
+
+    }
+ private void uploadImage2(){
+
+    }
+ private void uploadImage3(){
 
     }
 
@@ -68,8 +83,16 @@ public class CardFragmentWithUploadPhoto extends BaseFragment implements View.On
         switch (v.getId()){
             case R.id.tv_submit:
                 sendQuestion();
-            case R.id.iv_image:
-                uploadImage();
+                break;
+            case R.id.iv_image1:
+                uploadImage1();
+                break;
+            case R.id.iv_image2:
+                uploadImage2();
+                break;
+            case R.id.iv_image3:
+                uploadImage3();
+                break;
         }
 
     }

@@ -8,6 +8,7 @@
         android:layout_height="0dp"
         android:layout_weight="4"
         android:background="#ffeeeeee"
+        android:padding="30dp"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -38,17 +39,38 @@
 
         <ImageView
 
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_below="@id/tv_question"
-            android:id="@+id/iv_image"
+            android:id="@+id/iv_image2"
+            android:src="@mipmap/no_photo"
+            android:background="@drawable/background_image_bakcground"
+            android:padding="10dp"
+
+            />
+        <ImageView
+
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_below="@id/tv_question"
+            android:id="@+id/iv_image3"
+            android:src="@mipmap/no_photo"
+            android:background="@drawable/background_image_bakcground"
+            android:padding="10dp"
+            android:layout_alignParentRight="true"
+            />
+
+        <ImageView
+            android:layout_marginTop="30dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_below="@id/tv_question"
+            android:id="@+id/iv_image1"
             android:src="@mipmap/no_photo"
             android:background="@drawable/background_image_bakcground"
             android:padding="10dp"
             android:layout_centerHorizontal="true"
             />
-
-
 
         </RelativeLayout>
 
@@ -61,10 +83,7 @@
         android:background="#ff2fc9b0"
         android:gravity="center"
         >
-        <TextView
-            style="@style/AppTheme.Button"
-            android:text="Laheta"
-            />
+        <include layout="@layout/answer_button"/>
 
         </LinearLayout>
 

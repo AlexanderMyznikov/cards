@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -25,8 +27,7 @@ import models.UploadPhotoModel;
 public class CustomPageAdapter extends FragmentPagerAdapter {
 
     private List<Model> cardsModels;
-    private List<BaseFragment> fragments;
-    private Bundle bundle = new Bundle();
+
 
     public CustomPageAdapter(FragmentManager fm) {
         super(fm);
@@ -39,8 +40,9 @@ public class CustomPageAdapter extends FragmentPagerAdapter {
         BaseFragment fragment = null;
         Model currentCard = cardsModels.get(position);
 
-        bundle.clear();
-        bundle.putInt(Constants.MODEL_POSITION_KEY, position);
+        Bundle bundle =  new Bundle();
+        bundle.putParcelable(Constants.MODEL_QUESTION_KEY, currentCard );
+
 
 
         if(CheckBoxModel.class.isInstance(currentCard)) {
@@ -56,6 +58,7 @@ public class CustomPageAdapter extends FragmentPagerAdapter {
             fragment = new CardFragmentWithUploadPhoto();
         }
         fragment.setArguments(bundle);
+
 
         //We will create fragments here
 

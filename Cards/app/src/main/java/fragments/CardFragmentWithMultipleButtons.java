@@ -6,22 +6,21 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.alex.myapplication.MainActivity;
 import com.example.alex.myapplication.R;
 
+import constants.Constants;
 import models.MultyButtonsModel;
-import models.SinlgeTextModel;
+
 
 /**
  * Created by Admin on 22.03.2015.
  */
 public class CardFragmentWithMultipleButtons extends BaseFragment implements View.OnClickListener {
 
-
-        private TextView tvQuestion;
         private TextView tvSubmit;
 
 
@@ -42,15 +41,21 @@ public class CardFragmentWithMultipleButtons extends BaseFragment implements Vie
             return mRootView;
         }
         private void findViews(){
-            tvSubmit = (TextView)mRootView.findViewById(R.id.tv_submit);
             tvQuestion = (TextView)mRootView.findViewById(R.id.tv_question);
+            tvSubmit = (TextView) mRootView.findViewById(R.id.tv_submit);
+            tvPoints = (TextView)mRootView.findViewById(R.id.tv_points);
+            ivStar = (ImageView)mRootView.findViewById(R.id.iv_star);
         }
         private void setListeners(){
             tvSubmit.setOnClickListener(this);
         }
         private void setQuestion(){
-//            MultyButtonsModel model  =  (MultyButtonsModel)getModel();
-//            tvQuestion.setText(model.getQuestion());
+            MultyButtonsModel model  =  getArguments().getParcelable(Constants.MODEL_QUESTION_KEY);
+            mCardModel = model;
+            setData(model);
+
+
+
         }
         private void sendQuestion(){
 

@@ -28,6 +28,7 @@
             android:layout_margin="10dp"
             />
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_question"
@@ -50,11 +51,7 @@
         android:background="#ff2fc9b0"
         android:gravity="center"
         >
-        <TextView
-            android:id="@id/tv_submit"
-            style="@style/AppTheme.Button"
-            android:text="Laheta"
-            />
+        <include layout="@layout/answer_button"/>
 
     </LinearLayout>
 

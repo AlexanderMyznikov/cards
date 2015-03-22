@@ -1,30 +1,38 @@
 package com.example.alex.myapplication;
 
-import android.database.DataSetObserver;
+import android.app.ProgressDialog;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import adapters.CustomPageAdapter;
+import animations.ZoomOutPageTransformer;
+import constants.Constants;
 import fragments.OnFragmentChanged;
-import models.CheckBoxItem;
 import models.CheckBoxModel;
 import models.Model;
 import models.MultyButtonsItem;
 import models.MultyButtonsModel;
 import models.SinlgeTextModel;
 import models.UploadPhotoModel;
+import rest.CadsApi;
+import rest.RestCallback;
 
+import static constants.Constants.*;
 
 public class MainActivity extends ActionBarActivity implements OnFragmentChanged {
 
     private List<Model> cardsModels;
-
+    private ProgressDialog pbLoading;
     private CustomPageAdapter cardsAdapter;
 
 
@@ -32,18 +40,21 @@ public class MainActivity extends ActionBarActivity implements OnFragmentChanged
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pbLoading = new ProgressDialog(this);
+
+
         getQuestions();
-        setAdapter();
+
+
+
+
     }
 
     private void setAdapter() {
         ViewPager pager = (ViewPager)findViewById(R.id.vp_pager);
-
+         pager.setPageTransformer(true , new ZoomOutPageTransformer());
         cardsAdapter = new CustomPageAdapter(getSupportFragmentManager());
         cardsAdapter.setCardsModels(cardsModels);
-
-
-
         pager.setAdapter(cardsAdapter);
     }
 
@@ -64,56 +75,56 @@ public class MainActivity extends ActionBarActivity implements OnFragmentChanged
         return cardsModels;
     }
 
+    private void parseData(JSONObject jsonObject){
+        cardsModels = new ArrayList<>();
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("data");
+            for(int i = 0 ; i < jsonArray.length(); i++){
+                JSONObject object = jsonArray.getJSONObject(i);
+                String type = object.getString("card_type");
+                Model model = null;
+                switch (type){
+                    case TYPE_TEXT:
+                        model =  new Gson().fromJson(object.toString(), SinlgeTextModel.class);
+                        break;
+                    case TYPE_SELECT:
+                        model = new Gson().fromJson(object.toString(), CheckBoxModel.class);
+                        break;
+                    case TYPE_MULITIPLE:
+                        model = new Gson().fromJson(object.toString(),MultyButtonsModel.class);
+                        break;
+                    case TYPE_IMAGE_UPLOAD:
+                        model = new Gson().fromJson(object.toString(), UploadPhotoModel.class);
+                        break;
+                }
+
+                cardsModels.add(model);
+            }
+            setAdapter();
+
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
 
     private void getQuestions(){
-        cardsModels = new ArrayList<>();
-        MultyButtonsModel multiButtonsModel = getMultyButtonsModel();
+        pbLoading.show();
+        CadsApi.requestJsonObject(Constants.BASE_URL, "tag", new RestCallback() {
+            @Override
+            public void onSuccess(Object response) {
+                parseData((JSONObject)response);
 
-        CheckBoxModel checkBoxModel = new CheckBoxModel();
-        List<CheckBoxItem> items = new ArrayList<>();
+                pbLoading.dismiss();
 
-        CheckBoxItem checkBoxItem = new CheckBoxItem();
-        checkBoxItem.setQuestion("Are you happy?");
-        checkBoxItem.setState(true);
-        items.add(checkBoxItem);
+            }
 
-        CheckBoxItem checkBoxItem1 = new CheckBoxItem();
-        checkBoxItem.setQuestion("Do you like your life?");
-        checkBoxItem.setState(true);
-        items.add(checkBoxItem1);
+            @Override
+            public void onFailure(String error) {
+                pbLoading.dismiss();
+            }
+        });
 
-        CheckBoxItem checkBoxItem2 = new CheckBoxItem();
-        checkBoxItem.setQuestion("Are you sure?");
-        checkBoxItem.setState(false);
-        items.add(checkBoxItem2);
-
-        checkBoxModel.setQuestions(items);
-
-
-        Model singleTextModel = new SinlgeTextModel();
-        Model uploadPhotoModel = new UploadPhotoModel();
-
-        cardsModels.add(multiButtonsModel);
-        cardsModels.add(checkBoxModel);
-        cardsModels.add(singleTextModel);
-        cardsModels.add(uploadPhotoModel);
     }
 
-    private MultyButtonsModel getMultyButtonsModel() {
-        MultyButtonsModel multiButtonsModel = new MultyButtonsModel();
-
-        List<MultyButtonsItem> items = new ArrayList<>();
-        MultyButtonsItem item = new MultyButtonsItem();
-        item.setImgUrl("http://www.businessinsider.com/image/4f3433986bb3f7b67a00003c/cute-cat.jpg");
-        item.setText("do you like this?");
-        items.add(item);
-
-        MultyButtonsItem item2 = new MultyButtonsItem();
-        item.setImgUrl("http://i.ytimg.com/vi/mSFTRoBY99s/hqdefault.jpg");
-        item.setText("or maybe this?");
-        items.add(item2);
-        multiButtonsModel.setItems(items);
-        return multiButtonsModel;
-    }
 
 }
