@@ -1,11 +1,13 @@
 package fragments;
 
-import android.app.Fragment;
+
+import android.support.v4.app.Fragment;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.alex.myapplication.MainActivity;
 
-import android.support.v4.app.Fragment;
+
 
 import com.example.alex.myapplication.MainActivity;
 
@@ -18,7 +20,7 @@ import models.Model;
 
 public class BaseFragment extends Fragment {
     protected Model cardModel;
-
+    protected View mRootView;
 
 
 
